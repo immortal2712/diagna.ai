@@ -10,6 +10,7 @@ const Login = () => {
         heading="Diagna"
         showFooterLinks={false}
         showLinks={false}
+        showPatientDetailLink={false}
       />
       <SignInInput />
     </div>
