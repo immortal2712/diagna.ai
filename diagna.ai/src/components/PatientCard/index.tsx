@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchPatientCard } from "../../api";
 import Cards from "../Cards";
+import LoadMoreButton from "../LoadMoreButton";
 
 interface PatientStay {
   subject_id: number;
@@ -37,6 +38,7 @@ const PatientCard = () => {
         ?.flatMap((data) => data?.data)
         ?.map((item: PatientStay, index: number) => (
           <Cards
+            key={item?.subject_id}
             stayId={item?.stay_id}
             index={index}
             firstCareunit={item?.first_careunit}
@@ -46,17 +48,11 @@ const PatientCard = () => {
             dateOfDischarge={item?.outtime}
           />
         ))}
-      <div className="w-full flex items-center justify-center">
-        {hasNextPage && (
-          <button
-            onClick={handleLoadMoreClick}
-            className="w-24 bg-black rounded-xl text-white"
-            disabled={isFetching}
-          >
-            {isFetching ? "Loading..." : "Load more"}
-          </button>
-        )}
-      </div>
+      <LoadMoreButton
+        handleLoadMoreClick={handleLoadMoreClick}
+        isFetching={isFetching}
+        hasNextPage={hasNextPage}
+      />
     </div>
   );
 };

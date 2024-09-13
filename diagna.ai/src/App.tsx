@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -7,6 +7,10 @@ import Schedules from "./pages/Schedules";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";
 import { useEffect, useState } from "react";
+
+import Neurology from "./pages/Neurology";
+import Labs from "./pages/Labs";
+import Ventilation from "./pages/Ventilation";
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -40,6 +44,13 @@ function App() {
         <Route path="/schedules" element={<Schedules />} />
         <Route path="/users" element={<Users />} />
         <Route path="/settings" element={<Settings />} />
+        <Route
+          path="/patient-detail"
+          element={<Navigate to={"/neurology"} />}
+        />
+        <Route path="/neurology" element={<Neurology />} />
+        <Route path="/labs" element={<Labs />} />
+        <Route path="/ventilation" element={<Ventilation />} />
       </Routes>
     </div>
   );

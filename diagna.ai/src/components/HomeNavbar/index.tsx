@@ -1,4 +1,5 @@
 import { BiMenu, BiBell } from "react-icons/bi";
+import { IoArrowBackSharp } from "react-icons/io5";
 
 import { IoMdCloseCircleOutline } from "react-icons/io";
 
@@ -6,13 +7,25 @@ import DefaultProfilePicture from "../../assets/profilepic.jpg";
 import Sidebar from "../Sidebar";
 import useAuthenticate from "../../hooks/useAuthenticate";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const HomeNavbar = ({ pageName }: { pageName: string }) => {
+const HomeNavbar = ({
+  pageName,
+  showPatientDetailLink = false,
+}: {
+  pageName: string;
+  showPatientDetailLink?: boolean;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const { profilePic } = useAuthenticate();
 
   const handleClick = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleBack = () => {
+    navigate("/dashboard");
   };
 
   return (
@@ -39,12 +52,26 @@ const HomeNavbar = ({ pageName }: { pageName: string }) => {
               heading="Board."
               showFooterLinks={true}
               showLinks={true}
+              showPatientDetailLink={showPatientDetailLink}
             />
           </div>
         )}
-        <h1 className="menu-heading hidden text-black text-base font-[Montserrat] font-bold leading-[1.81rem] sm:ml-3 md:ml-1 lg:ml-[3.75rem] sm:block">
-          {pageName}
-        </h1>
+        {showPatientDetailLink ? (
+          <div className="flex items-center justify-start sm:ml-3 md:ml-1 lg:ml-[3.75rem] gap-4">
+            <IoArrowBackSharp
+              className="cursor-pointer"
+              size={24}
+              onClick={handleBack}
+            />
+            <h1 className="menu-heading hidden text-black text-base font-[Montserrat] font-bold leading-[1.81rem]  sm:block">
+              {pageName}
+            </h1>
+          </div>
+        ) : (
+          <h1 className="menu-heading hidden text-black text-base font-[Montserrat] font-bold leading-[1.81rem] sm:ml-3 md:ml-1 lg:ml-[3.75rem] sm:block">
+            {pageName}
+          </h1>
+        )}
       </div>
       <div className="nav-right flex items-center ml-7 md:ml-14">
         <div className="icon flex flex-row  sm:ml-1 md:ml-2 lg:ml-[1.87rem] px-4 md:px-3 2xl:px-0 items-center">

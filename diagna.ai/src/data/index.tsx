@@ -31,6 +31,23 @@ export const links = [
     to: "/settings",
   },
 ];
+export const patientDetailLinks = [
+  {
+    title: "Neurology",
+    icon: <RiPieChartLine />,
+    to: "/neurology",
+  },
+  {
+    title: "Labs",
+    icon: <RiPieChartLine />,
+    to: "/labs",
+  },
+  {
+    title: "Ventilation",
+    icon: <RiPieChartLine />,
+    to: "/ventilation",
+  },
+];
 
 export const sideNavFooter = [
   {
